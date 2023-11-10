@@ -16,7 +16,8 @@ class MainActivity : AppCompatActivity() {
         val anagrams = mutableListOf<String>()
 
         binding.btnSave.setOnClickListener {
-            if(binding.etEnterAnagram.text.toString().trim().isEmpty()){
+            binding.tvErrorEnterAnagram.text = ""
+            if (binding.etEnterAnagram.text.toString().trim().isEmpty()) {
                 binding.tvErrorEnterAnagram.text = "Enter a value in this field"
                 return@setOnClickListener
             }
@@ -24,6 +25,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnOutput.setOnClickListener {
+            if (anagrams.size == 0) {
+                val generateText = "enter anagrams first"
+                binding.tvAnagramCount.text = generateText
+                return@setOnClickListener
+            }
+
             val batchAnagrams = findAnagrams(anagrams)
             val anagramCount = batchAnagrams.size
 
